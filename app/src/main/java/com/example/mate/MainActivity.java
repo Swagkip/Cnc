@@ -35,7 +35,15 @@ public class MainActivity extends AppCompatActivity {
                                    @Override
                                    public void onClick(View v) {
                                        Intent intent = new Intent(v.getContext(), Main2Activity.class);
+                                       //pasar datos
+                                       intent.putExtra("r1",etnr1.getText().toString());
+                                       intent.putExtra("i1",etni1.getText().toString());
+                                       intent.putExtra("r2",etnr2.getText().toString());
+                                       intent.putExtra("i2",etni2.getText().toString());
+
+
                                        startActivityForResult(intent, 0);
+
                                    }
                                });
     }
