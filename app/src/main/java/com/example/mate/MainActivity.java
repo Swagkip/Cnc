@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         tvres=(TextView)findViewById(R.id.resultado);
 
 
-        ImageButton btn = findViewById(R.id.boton);
+        Button btn = findViewById(R.id.ver_gra);
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
@@ -42,10 +43,19 @@ public class MainActivity extends AppCompatActivity {
                                        intent.putExtra("i2",etni2.getText().toString());
 
 
+
                                        startActivityForResult(intent, 0);
 
                                    }
                                });
+
+        ImageButton ayuda= findViewById(R.id.boton);
+        ayuda.setOnClickListener(new View.OnClickListener(){
+                                     @Override
+                                     public void onClick(View v) {
+                                         Intent intento = new Intent(v.getContext(), Main3Activity.class);
+                                         startActivityForResult(intento, 0);
+        }});
     }
 
 
