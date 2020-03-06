@@ -25,4 +25,14 @@
         tools:layout_editor_absoluteX="51dp"
         tools:layout_editor_absoluteY="639dp" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="146dp"
+        android:layout_height="61dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="639dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

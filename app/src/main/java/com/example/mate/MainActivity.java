@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etnr2;
     private EditText etni2;
     private TextView tvres;
+    private int drr1;
+    private int dri2;
 
 
     //Casteo de los componentes
@@ -31,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
         tvres=(TextView)findViewById(R.id.resultado);
 
 
+
+
         Button btn = findViewById(R.id.ver_gra);
+
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                                        intent.putExtra("i1",etni1.getText().toString());
                                        intent.putExtra("r2",etnr2.getText().toString());
                                        intent.putExtra("i2",etni2.getText().toString());
+                                       intent.putExtra("vrr",drr1);
+                                       intent.putExtra("vri",dri2);
 
 
 
@@ -68,14 +76,30 @@ public class MainActivity extends AppCompatActivity {
         String vi1=etni1.getText().toString();
         String vr2=etnr2.getText().toString();
         String vi2=etni2.getText().toString();
+        if(TextUtils.isEmpty(vr1)) {
+            etnr1.setError("No puedes dejar campos vacios");
+            return;
+        }
+        if(TextUtils.isEmpty(vr2)) {
+            etnr2.setError("No puedes dejar campos vacios");
+            return;
+        }
+        if(TextUtils.isEmpty(vi1)) {
+            etni1.setError("No puedes dejar campos vacios");
+            return;
+        }
+        if(TextUtils.isEmpty(vi2)) {
+            etni2.setError("No puedes dejar campos vacios");
+            return;
+        }
 
         int r1=Integer.parseInt(vr1);
         int i1=Integer.parseInt(vi1);
         int r2=Integer.parseInt(vr2);
         int i2=Integer.parseInt(vi2);
 
-        int sumare= r1 + r2;
-        int sumaim= i1 + i2;
+        final int sumare= r1 + r2;
+        final int sumaim= i1 + i2;
 
         if(sumaim<0)
         {
@@ -87,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
             String resu= sumare + "+" + sumaim +"i";
             tvres.setText(resu);
         }
-
+        drr1=sumare;
+        dri2=sumaim;
 
 
 
@@ -105,16 +130,18 @@ public class MainActivity extends AppCompatActivity {
         int r2 = Integer.parseInt(vr2);
         int i2 = Integer.parseInt(vi2);
 
-        int sumare = r1 - r2;
-        int sumaim = i1 - i2;
+        int sumares = r1 - r2;
+        int sumaima = i1 - i2;
 
-        if (sumaim < 0) {
-            String resu = sumare + " " + sumaim + "i";
+        if (sumaima < 0) {
+            String resu = sumares + " " + sumaima + "i";
             tvres.setText(resu);
         } else {
-            String resu = sumare + "+" + sumaim + "i";
+            String resu = sumares + "+" + sumaima + "i";
             tvres.setText(resu);
         }
+        drr1= sumares;
+        dri2=sumaima;
     }
 
     //metodo de Dividir
@@ -156,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
+        drr1= suma;
+        dri2=sumb;
     }
     //metodo multiplicar
     public void Multiplicar(View res){
@@ -190,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
 
             tvres.setText(resu);
         }
+        drr1=suma;
+        dri2=sumb;
     }
     //inverso
 
