@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -28,59 +29,33 @@ public class Main2Activity extends AppCompatActivity {
         String di1 = getIntent().getStringExtra("i1");
         String dr2 = getIntent().getStringExtra("r2");
         String di2 = getIntent().getStringExtra("i2");
-        int vrg= getIntent().getIntExtra("vrr",0);
-        int vig= getIntent().getIntExtra("vri",0);
+
+        float vrg= getIntent().getFloatExtra("vrr",0);
+        float vig= getIntent().getFloatExtra("vri",0);
 
 
 
         //casteo
-        int dar1 = Integer.parseInt(dr1);
-        int dai1 = Integer.parseInt(di1);
-        int dar2 = Integer.parseInt(dr2);
-        int dai2 = Integer.parseInt(di2);
+        float dar1 = Float.parseFloat(dr1);
+        float dai1 = Float.parseFloat(di1);
+        float dar2 = Float.parseFloat(dr2);
+        float dai2 = Float.parseFloat(di2);
+
+//
+ TextView mostrar1;
+ TextView mostrar2;
+ TextView mostrar3;
 
 
 
-
-        //suma
-       // int sumare= dar1 + dar2;
-        //int sumaim= dai1 + dai2;
-
-        //resta
-        //int sumarere= dar1 - dar2;
-        //int sumaimre= dai1 - dai2;
-
-        //multiplicación
-        //int ac=dar1 * dar2;
-        //int ad=dar1 * dai2;
-        //int bc=dar2 * dai1;
-        //int bd=dai1 * dai2;
-
-        //int suma=ac + (bd*-1);
-        //int sumb= ad + bc;
-
-        //division
-        //int inv= dai2 * -1;
-        //int acd=dar1 * dar2;
-        //int add=dar1 * inv;
-        //int bcd=dar2 * dai1;
-        //int bdd=dai1 * inv;
-        //int da=dar2 * dar2;
-        //int db=inv * inv;
-
-        //int sumad=ac + (bd*-1);
-        //int sumbd= ad + bc;
-        //int sumdivd=db + da;
-       //variable 1
         GraphView graph = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 0),
-                new DataPoint(dar1, dai1),
-
-
-        });
+        GraphView graphi = (GraphView) findViewById(R.id.graph);
+        GraphView graphii = (GraphView) findViewById(R.id.graph);
+        mostrar1=(TextView)findViewById(R.id.textView);
+        mostrar2=(TextView)findViewById(R.id.textView4);
+        mostrar3=(TextView)findViewById(R.id.textView3);
         //escalable y que se deslize la wea
-        graph.addSeries(series);
+
 
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(-150);
@@ -97,23 +72,289 @@ public class Main2Activity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
 
-        // Variable 2
-        GraphView graphi = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> seriess = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 0),
-                new DataPoint(dar2, dai2),
 
-        });
-// condicionales de los cuadrantes
+
+
+
+// condicionales de los cuadrantes variable 1
+        if (dar1<0)
+        {
+            if(dai1<0)
+            {
+                //cuadrante 3
+                //variable 1
+
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(dar1, dai1),
+                        new DataPoint(0, 0),
+                });
+                graph.addSeries(series);
+                series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                series.setAnimated(true);
+                series.setDrawDataPoints(true);
+                series.setDataPointsRadius(15);
+                series.setDrawBackground(false);
+                series.setColor(Color.rgb(214, 41, 207 ));
+
+                String resu= dar1 + " " + dai1 +"i";
+                mostrar1.setText(resu);
+
+            }
+            else
+            {
+                //cuadrante 2
+                //variable 1
+
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(dar1, dai1),
+                        new DataPoint(0, 0),
+                });
+                graph.addSeries(series);
+                series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                series.setAnimated(true);
+                series.setDrawDataPoints(true);
+                series.setDataPointsRadius(15);
+                series.setDrawBackground(false);
+                series.setColor(Color.rgb(214, 41, 207 ));
+
+                String resu= dar1 + "+" + dai1 +"i";
+                mostrar1.setText(resu);
+            }
+        }
+        else
+        {
+            if (dai1<0)
+            {
+                //cuadrante 4
+                //variable 1
+
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0, 0),
+                        new DataPoint(dar1, dai1),
+
+                });
+                graph.addSeries(series);
+                series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                series.setAnimated(true);
+                series.setDrawDataPoints(true);
+                series.setDataPointsRadius(15);
+                series.setDrawBackground(false);
+                series.setColor(Color.rgb(214, 41, 207 ));
+
+                String resu= dar1 + " " + dai1 +"i";
+                mostrar1.setText(resu);
+            }
+            else
+            {
+                //cuadante 1
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                        new DataPoint(0, 0),
+                        new DataPoint(dar1, dai1),
+
+                });
+                graph.addSeries(series);
+                series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                series.setAnimated(true);
+                series.setDrawDataPoints(true);
+                series.setDataPointsRadius(15);
+                series.setDrawBackground(false);
+                series.setColor(Color.rgb(214, 41, 207 ));
+
+                String resu= dar1 + "+" + dai1 +"i";
+                mostrar1.setText(resu);
+            }
+        }
+        // condicionales de los cuadrantes variable 2
+        if (dar2<0)
+        {
+            if(dai2<0)
+            {
+                //cuadrante 3
+                LineGraphSeries<DataPoint> seriess = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(dar2, dai2),
+                        new DataPoint(0, 0),
+
+
+                });
+                graphi.addSeries(seriess);
+                seriess.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                seriess.setThickness(5);
+                seriess.setColor(Color.rgb(41, 214, 52  ));
+                seriess.setAnimated(true);
+                seriess.setDrawDataPoints(true);
+                seriess.setDataPointsRadius(15);
+                seriess.setDrawBackground(false);
+
+                String resuu= dar2 + " " + dai2 +"i";
+                mostrar2.setText(resuu);
+            }
+            else
+            {
+                //cuadrante 2
+                LineGraphSeries<DataPoint> seriess = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(dar2, dai2),
+                        new DataPoint(0, 0),
+
+
+                });
+                graphi.addSeries(seriess);
+                seriess.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                seriess.setThickness(5);
+                seriess.setColor(Color.rgb(41, 214, 52  ));
+                seriess.setAnimated(true);
+                seriess.setDrawDataPoints(true);
+                seriess.setDataPointsRadius(15);
+                seriess.setDrawBackground(false);
+
+                String resuu= dar2 + "+" + dai2 +"i";
+                mostrar2.setText(resuu);
+            }
+        }
+        else
+        {
+            if (dai2<0)
+            {
+                //cuadrante 4
+                LineGraphSeries<DataPoint> seriess = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(0, 0),
+                        new DataPoint(dar2, dai2),
+
+
+
+                });
+                graphi.addSeries(seriess);
+                seriess.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                seriess.setThickness(5);
+                seriess.setColor(Color.rgb(41, 214, 52  ));
+                seriess.setAnimated(true);
+                seriess.setDrawDataPoints(true);
+                seriess.setDataPointsRadius(15);
+                seriess.setDrawBackground(false);
+
+                String resuu= dar2 + " " + dai2 +"i";
+                mostrar2.setText(resuu);
+            }
+            else
+            {
+                //cuadante 1
+                LineGraphSeries<DataPoint> seriess = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(0, 0),
+                        new DataPoint(dar2, dai2),
+
+
+
+                });
+                graphi.addSeries(seriess);
+                seriess.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                seriess.setThickness(5);
+                seriess.setColor(Color.rgb(41, 214, 52  ));
+                seriess.setAnimated(true);
+                seriess.setDrawDataPoints(true);
+                seriess.setDataPointsRadius(15);
+                seriess.setDrawBackground(false);
+
+                String resuu= dar2 + "+" + dai2 +"i";
+                mostrar2.setText(resuu);
+            }
+        }
+        // condicionales de los cuadrantes variable resultante
         if (vrg<0)
         {
             if(vig<0)
             {
                 //cuadrante 3
+                LineGraphSeries<DataPoint> seriesss = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(vrg, vig),
+                        new DataPoint(0,0),
+
+
+                });
+                graphii.addSeries(seriesss);
+                seriesss.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                seriesss.setThickness(5);
+
+                seriesss.setColor(Color.argb(100,210,63,31));
+                seriesss.setAnimated(true);
+                seriesss.setDrawDataPoints(true);
+                seriesss.setDataPointsRadius(15);
+                seriesss.setDrawBackground(false);
+
+                String resuuu= vrg + " " + vig +"i";
+                mostrar3.setText(resuuu);
             }
             else
             {
                 //cuadrante 2
+                LineGraphSeries<DataPoint> seriesss = new LineGraphSeries<>(new DataPoint[] {
+                        new DataPoint(vrg, vig),
+                        new DataPoint(0,0),
+
+
+                });
+                graphii.addSeries(seriesss);
+                seriesss.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                seriesss.setThickness(5);
+
+                seriesss.setColor(Color.argb(100,210,63,31));
+                seriesss.setAnimated(true);
+                seriesss.setDrawDataPoints(true);
+                seriesss.setDataPointsRadius(15);
+                seriesss.setDrawBackground(false);
+
+                String resuuu= vrg + "+" + vig +"i";
+                mostrar3.setText(resuuu);
             }
         }
         else
@@ -121,65 +362,65 @@ public class Main2Activity extends AppCompatActivity {
             if (vig<0)
             {
                 //cuadrante 4
+                LineGraphSeries<DataPoint> seriesss = new LineGraphSeries<>(new DataPoint[] {
+
+                        new DataPoint(0,0),
+                        new DataPoint(vrg, vig),
+
+                });
+                graphii.addSeries(seriesss);
+                seriesss.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                seriesss.setThickness(5);
+
+                seriesss.setColor(Color.argb(100,210,63,31));
+                seriesss.setAnimated(true);
+                seriesss.setDrawDataPoints(true);
+                seriesss.setDataPointsRadius(15);
+                seriesss.setDrawBackground(false);
+
+                String resuuu= vrg + " " + vig +"i";
+                mostrar3.setText(resuuu);
             }
             else
             {
                 //cuadante 1
+                LineGraphSeries<DataPoint> seriesss = new LineGraphSeries<>(new DataPoint[] {
+
+                        new DataPoint(0,0),
+                        new DataPoint(vrg, vig),
+
+                });
+                graphii.addSeries(seriesss);
+                seriesss.setOnDataPointTapListener(new OnDataPointTapListener() {
+                    @Override
+                    public void onTap(Series series, DataPointInterface dataPoint) {
+                        Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                seriesss.setThickness(5);
+
+                seriesss.setColor(Color.argb(100,210,63,31));
+                seriesss.setAnimated(true);
+                seriesss.setDrawDataPoints(true);
+                seriesss.setDataPointsRadius(15);
+                seriesss.setDrawBackground(false);
+
+                String resuuu= vrg + "+" + vig +"i";
+                mostrar3.setText(resuuu);
             }
         }
-        //resultado
-        GraphView graphii = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> seriesss = new LineGraphSeries<>(new DataPoint[] {
 
-                new DataPoint(0,0),
-               new DataPoint(vrg, vig),
 
-        });
-        series.setOnDataPointTapListener(new OnDataPointTapListener() {
-            @Override
-            public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
-            }
-        });
-        seriess.setOnDataPointTapListener(new OnDataPointTapListener() {
-            @Override
-            public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
-            }
-        });
-        seriesss.setOnDataPointTapListener(new OnDataPointTapListener() {
-            @Override
-            public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(Main2Activity.this,"Este punto está ubicado en las coordenadas"+dataPoint, Toast.LENGTH_SHORT).show();
-            }
-        });
-        graphii.addSeries(seriesss);
-        graphi.addSeries(seriess);
 
-        //var1
-        series.setThickness(5);
 
-        series.setAnimated(true);
-        series.setDrawDataPoints(true);
-        series.setDataPointsRadius(5);
-        series.setDrawBackground(false);
-        series.setColor(Color.rgb(214, 41, 207 ));
 
-        //var2
-        seriess.setThickness(5);
-        seriess.setColor(Color.rgb(41, 214, 52  ));
-        seriess.setAnimated(true);
-        seriess.setDrawDataPoints(true);
-        seriess.setDataPointsRadius(5);
-        seriess.setDrawBackground(false);
-        //var3
-        seriesss.setThickness(5);
-
-        seriesss.setColor(Color.argb(80,210,63,31));
-        seriesss.setAnimated(true);
-        seriesss.setDrawDataPoints(true);
-        seriesss.setDataPointsRadius(5);
-        seriesss.setDrawBackground(false);
     }
 
 

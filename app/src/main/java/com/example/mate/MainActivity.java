@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Button;
+import java.math.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,8 +19,18 @@ public class MainActivity extends AppCompatActivity {
     private EditText etnr2;
     private EditText etni2;
     private TextView tvres;
-    private int drr1;
-    private int dri2;
+    private TextView polres;
+    private TextView eulres;
+    private float drr1;
+    private float dri2;
+    private float fpr;
+    private float fpi;
+
+    private float aux1;
+    private float aux2;
+    private float aux3;
+    private float aux4;
+    private float aux5;
 
 
     //Casteo de los componentes
@@ -32,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         etnr2=(EditText)findViewById(R.id.txt_num_2_re);
         etni2=(EditText)findViewById(R.id.txt_num_2_im);
         tvres=(TextView)findViewById(R.id.resultado);
+        polres=(TextView)findViewById(R.id.textView8);
+        eulres=(TextView)findViewById(R.id.textView9);
 
 
 
@@ -93,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int r1=Integer.parseInt(vr1);
-        int i1=Integer.parseInt(vi1);
-        int r2=Integer.parseInt(vr2);
-        int i2=Integer.parseInt(vi2);
+        float r1=Float.parseFloat(vr1);
+        float i1=Float.parseFloat(vi1);
+        float r2=Float.parseFloat(vr2);
+        float i2=Float.parseFloat(vi2);
 
-        final int sumare= r1 + r2;
-        final int sumaim= i1 + i2;
+        final float sumare= r1 + r2;
+        final float sumaim= i1 + i2;
 
         if(sumaim<0)
         {
@@ -114,6 +127,23 @@ public class MainActivity extends AppCompatActivity {
         drr1=sumare;
         dri2=sumaim;
 
+        aux1=drr1*drr1;
+        aux2=dri2*dri2;
+        aux3=dri2/drr1;
+        fpr= (float) Math.sqrt(aux1+aux2);
+        fpi= (float) Math.atan(aux3);
+        aux4=(float)Math.toDegrees(fpi);
+
+
+
+        String pol=fpr+"(cos("+aux4+")+sen("+aux4+"))";
+        polres.setText(pol);
+
+        String eul=fpr+"e^(i."+aux4+")";
+        eulres.setText(eul);
+
+
+
 
 
     }
@@ -125,13 +155,13 @@ public class MainActivity extends AppCompatActivity {
         String vr2 = etnr2.getText().toString();
         String vi2 = etni2.getText().toString();
 
-        int r1 = Integer.parseInt(vr1);
-        int i1 = Integer.parseInt(vi1);
-        int r2 = Integer.parseInt(vr2);
-        int i2 = Integer.parseInt(vi2);
+        float r1 = Integer.parseInt(vr1);
+        float i1 = Integer.parseInt(vi1);
+        float r2 = Integer.parseInt(vr2);
+        float i2 = Integer.parseInt(vi2);
 
-        int sumares = r1 - r2;
-        int sumaima = i1 - i2;
+        float sumares = r1 - r2;
+        float sumaima = i1 - i2;
 
         if (sumaima < 0) {
             String resu = sumares + " " + sumaima + "i";
@@ -142,6 +172,22 @@ public class MainActivity extends AppCompatActivity {
         }
         drr1= sumares;
         dri2=sumaima;
+
+        aux1=drr1*drr1;
+        aux2=dri2*dri2;
+        aux3=dri2/drr1;
+        fpr= (float) Math.sqrt(aux1+aux2);
+        fpi= (float) Math.atan(aux3);
+        aux4=(float)Math.toDegrees(fpi);
+
+
+
+        String pol=fpr+"(cos("+aux4+")+sen("+aux4+"))";
+        polres.setText(pol);
+
+        String eul=fpr+"e^(i."+aux4+")";
+        eulres.setText(eul);
+
     }
 
     //metodo de Dividir
@@ -152,22 +198,22 @@ public class MainActivity extends AppCompatActivity {
         String vr2=etnr2.getText().toString();
         String vi2=etni2.getText().toString();
 
-        int r1=Integer.parseInt(vr1);
-        int i1=Integer.parseInt(vi1);
-        int r2=Integer.parseInt(vr2);
-        int i2=Integer.parseInt(vi2);
+        float r1=Integer.parseInt(vr1);
+        float i1=Integer.parseInt(vi1);
+        float r2=Integer.parseInt(vr2);
+        float i2=Integer.parseInt(vi2);
 
-        int inv= i2 * -1;
-        int ac=r1 * r2;
-        int ad=r1 * inv;
-        int bc=r2 * i1;
-        int bd=i1 * inv;
-        int da=r2 * r2;
-        int db=inv * inv;
+        float inv= i2 * -1;
+        float ac=r1 * r2;
+        float ad=r1 * inv;
+        float bc=r2 * i1;
+        float bd=i1 * inv;
+        float da=r2 * r2;
+        float db=inv * inv;
 
-        int suma=ac + (bd*-1);
-        int sumb= ad + bc;
-        int sumdiv=db + da;
+        float suma=ac + (bd*-1);
+        float sumb= ad + bc;
+        float sumdiv=db + da;
 
         if(sumb<0)
         {
@@ -183,8 +229,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        drr1= suma;
-        dri2=sumb;
+        drr1= suma/sumdiv;
+        dri2=sumb/sumdiv;
+
+        aux1=drr1*drr1;
+        aux2=dri2*dri2;
+        aux3=dri2/drr1;
+        fpr= (float) Math.sqrt(aux1+aux2);
+        fpi= (float) Math.atan(aux3);
+        aux4=(float)Math.toDegrees(fpi);
+
+
+
+        String pol=fpr+"(cos("+aux4+")+sen("+aux4+"))";
+        polres.setText(pol);
+
+        String eul=fpr+"e^(i."+aux4+")";
+        eulres.setText(eul);
+
     }
     //metodo multiplicar
     public void Multiplicar(View res){
@@ -193,18 +255,18 @@ public class MainActivity extends AppCompatActivity {
         String vr2=etnr2.getText().toString();
         String vi2=etni2.getText().toString();
 
-        int r1=Integer.parseInt(vr1);
-        int i1=Integer.parseInt(vi1);
-        int r2=Integer.parseInt(vr2);
-        int i2=Integer.parseInt(vi2);
+        float r1=Integer.parseInt(vr1);
+        float i1=Integer.parseInt(vi1);
+        float r2=Integer.parseInt(vr2);
+        float i2=Integer.parseInt(vi2);
 
-        int ac=r1 * r2;
-        int ad=r1 * i2;
-        int bc=r2 * i1;
-        int bd=i1 * i2;
+        float ac=r1 * r2;
+        float ad=r1 * i2;
+        float bc=r2 * i1;
+        float bd=i1 * i2;
 
-        int suma=ac + (bd*-1);
-        int sumb= ad + bc;
+        float suma=ac + (bd*-1);
+        float sumb= ad + bc;
 
         if(sumb<0)
         {
@@ -220,8 +282,24 @@ public class MainActivity extends AppCompatActivity {
         }
         drr1=suma;
         dri2=sumb;
+
+        aux1=drr1*drr1;
+        aux2=dri2*dri2;
+        aux3=dri2/drr1;
+        fpr= (float) Math.sqrt(aux1+aux2);
+        fpi= (float) Math.atan(aux3);
+        aux4=(float)Math.toDegrees(fpi);
+
+
+
+        String pol=fpr+"(cos("+aux4+")+sen("+aux4+"))";
+        polres.setText(pol);
+
+        String eul=fpr+"e^(i."+aux4+")";
+        eulres.setText(eul);
+
     }
-    //inverso
+
 
 
 }
